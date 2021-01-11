@@ -119,6 +119,8 @@ module Rswag
       def build_query_string_part(param, value)
         name = param[:name]
         type = param[:type] || param.dig(:schema, :type)
+
+        return "#{name}" if type == :boolean
         return "#{name}=#{value}" unless type&.to_sym == :array
 
         case param[:collectionFormat]
